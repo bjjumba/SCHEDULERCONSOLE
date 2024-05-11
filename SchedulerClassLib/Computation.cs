@@ -38,11 +38,7 @@ public static class Computation
         return Tuple.Create(nextDate, description)!;
     }
     
-    // public Tuple<DateOnly, string> ComputeNextDate(Config config)
-    // {
-    //     var result = calculateNextDate(config);
-    //     return result;
-    // }
+ 
 }
 
 

@@ -4,7 +4,7 @@ using SchedulerClassLib;
 public class SchedulerTest
 {
     [Fact]
-    public void RecurringDateTest()
+    public void CurrentDate_Is_After_StartDate()
     {
         //Arrange
         var expectedDate = new DateOnly(2020, 1, 5);
@@ -22,5 +22,10 @@ public class SchedulerTest
         
         //Assert
         Assert.Equal(expectedDate, result.Item1);
+    }
+    [Fact]
+    public void CurrentDate_Is_Before_StartDate()
+    {
+        
     }
 }
