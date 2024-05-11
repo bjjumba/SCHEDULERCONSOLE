@@ -1,7 +1,7 @@
 namespace SchedulerTest;
 using SchedulerClassLib;
 
-public class SchedulerTest
+public class RecurringTest
 {
     [Fact]
     public void CurrentDate_Is_After_StartDate()
