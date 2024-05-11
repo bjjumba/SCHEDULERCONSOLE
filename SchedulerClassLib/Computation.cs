@@ -18,9 +18,9 @@ public static class Computation
         else if (config.OccurenceType == Occurence.Once)
         {
             GuardHelper.ValidateDateForOneTime(config);
-            DateOnly date = DateOnly.FromDateTime(config.ConfDateTime);
-            TimeOnly time = TimeOnly.FromDateTime(config.ConfDateTime);
-            nextDate = config.StartDate > config.CurrentDate ? config.StartDate : currentExecutionDate.AddDays(config.OccursEvery);
+            var date = DateOnly.FromDateTime(config.ConfDateTime);
+            var time = TimeOnly.FromDateTime(config.ConfDateTime);
+            nextDate = config.ConfDateTime;
             description = $"Schedule will be used on {date} at {time} starting on {config.StartDate}";
         }
         return Tuple.Create(nextDate, description)!;
