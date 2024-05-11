@@ -12,7 +12,6 @@ public class RecurringTest
         //Act
         var result = Computation.ComputeNextDate(new Config
         {
-            ConfDateTime = new DateTime(2024, 5, 4, 3, 40, 5),
             CurrentDate = new DateTime(2020, 1, 4),
             OccurenceType = Occurence.Recurring,
             OccursEvery = 1,
@@ -32,7 +31,6 @@ public class RecurringTest
         //Act
         var result = Computation.ComputeNextDate(new Config
         {
-            ConfDateTime = new DateTime(2024, 5, 4, 3, 40, 5),
             CurrentDate = new DateTime(2020, 1, 1),
             OccurenceType = Occurence.Recurring,
             OccursEvery = 1,
