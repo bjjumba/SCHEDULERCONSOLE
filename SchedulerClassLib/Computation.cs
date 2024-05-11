@@ -2,10 +2,10 @@ namespace SchedulerClassLib;
 
 public static class Computation
 {
-    public static Tuple<DateOnly, string> ComputeNextDate(Config config)
+    public static Tuple<DateTime, string> ComputeNextDate(Config config)
     {
-        DateOnly currentExecutionDate = config.CurrentDate;
-        DateOnly nextDate = default;
+        DateTime currentExecutionDate = config.CurrentDate;
+        DateTime nextDate = default;
         var description = "";
     
         GuardHelper.ValidateInput(config);
