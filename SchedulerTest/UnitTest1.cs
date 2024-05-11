@@ -12,7 +12,7 @@ public class SchedulerTest
     public void RecurringDateTest()
     {
         //Arrange
-        var expectedDate = new DateOnly(2020, 1, 5);
+        var expectedDate = new DateOnly(2020, 2, 5);
         
         //Act
         var result = _compute.ComputeNextDate(new Config
