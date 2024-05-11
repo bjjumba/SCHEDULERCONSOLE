@@ -10,15 +10,17 @@ public static class Computation
     
         GuardHelper.ValidateInput(config);
         
-        // if (config.StartDate > config.CurrentDate)
-        // {
-        //     currentExecutionDate = config.StartDate;
-        // }
-        //
+        if (config.StartDate > config.CurrentDate)
+        {
+            nextDate = config.StartDate;
+        }
         
         if (config.OccurenceType == Occurence.Recurring)
         {
-            nextDate = currentExecutionDate.AddDays(config.OccursEvery);
+            if (nextDate == default)
+            {
+                nextDate = currentExecutionDate.AddDays(config.OccursEvery);
+            }
             description = $"Schedule will be used starting on {config.StartDate}";
         }
         
@@ -26,7 +28,11 @@ public static class Computation
         {
             DateOnly date = DateOnly.FromDateTime(config.ConfDateTime);
             TimeOnly time = TimeOnly.FromDateTime(config.ConfDateTime);
-            nextDate = config.CurrentDate.AddDays(+1);
+            
+            if (nextDate == default)
+            {
+                nextDate = currentExecutionDate.AddDays(config.OccursEvery);
+            }
             description = $"Schedule will be used on {date} at {time} starting on {config.StartDate}";
         }
         return Tuple.Create(nextDate, description)!;
