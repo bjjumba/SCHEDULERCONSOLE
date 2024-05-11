@@ -5,7 +5,7 @@ public class GuardHelper
     public static void ValidateInput(Config config)
     {
         /* Second Guard: End date check */
-        if (DateTime.Compare(config.CurrentDate, config.EndDate)>0)
+        if (config.CurrentDate > config.EndDate)
         {
             throw new Exception("Current Date is After End Date");
         }
