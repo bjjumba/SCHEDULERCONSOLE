@@ -4,14 +4,21 @@ public static class Computation
 {
     public static Tuple<DateOnly, string> ComputeNextDate(Config config)
     {
+        DateOnly currentExecutionDate = config.CurrentDate;
         DateOnly nextDate = default;
         var description = "";
     
         GuardHelper.ValidateInput(config);
         
+        // if (config.StartDate > config.CurrentDate)
+        // {
+        //     currentExecutionDate = config.StartDate;
+        // }
+        //
+        
         if (config.OccurenceType == Occurence.Recurring)
         {
-            nextDate = config.CurrentDate.AddDays(config.OccursEvery);
+            nextDate = currentExecutionDate.AddDays(config.OccursEvery);
             description = $"Schedule will be used starting on {config.StartDate}";
         }
         

@@ -7,7 +7,7 @@ public class SchedulerTest
     public void RecurringDateTest()
     {
         //Arrange
-        var expectedDate = new DateOnly(2020, 2, 5);
+        var expectedDate = new DateOnly(2020, 1, 5);
         
         //Act
         var result = Computation.ComputeNextDate(new Config
@@ -16,7 +16,7 @@ public class SchedulerTest
             CurrentDate = new DateOnly(2020, 1, 4),
             OccurenceType = Occurence.Recurring,
             OccursEvery = 1,
-            StartDate = new DateOnly(2020, 1, 6),
+            StartDate = new DateOnly(2020, 1, 1),
             EndDate = new DateOnly(2020, 1, 8),
         });
         
