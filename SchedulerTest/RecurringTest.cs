@@ -41,8 +41,4 @@ public class RecurringTest
         //Assert
         Assert.Equal(expectedDate, result.Item1);
     }
-    
-    //Daily Frequency
-
-    
 }

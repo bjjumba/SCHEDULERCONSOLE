@@ -24,8 +24,6 @@ public class GuardHelper
     public static void CheckIfStartTimeIsBeforeEndTime(TimeOnly startTime, TimeOnly endTime)
     {
         if (startTime > endTime)
-            throw new ArgumentException("StartTime is After EndTime");
+            throw new ArgumentException("StartTime is after EndTime");
     }
-    
-
 }
