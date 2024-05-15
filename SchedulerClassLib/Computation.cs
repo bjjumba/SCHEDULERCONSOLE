@@ -4,7 +4,7 @@ public static class Computation
 {
     public static Tuple<DateTime, string> ComputeNextDate(Config config)
     {
-        DateOnly currentExecutionDate = DateOnly.FromDateTime(config.CurrentDate);
+        DateTime currentExecutionDate = config.CurrentDate;
         DateTime nextDate = default;
         var description = "";
         
@@ -13,12 +13,13 @@ public static class Computation
             var timeIntervals = new Dictionary<DateTime,TimeOnly>();
             GuardHelper.ValidateInput(config);
             
-            var nextExecutionDate = currentExecutionDate.AddDays(config.OccursEvery);
-            var nextExecutionTime = config.StartTime.AddHours(config.EveryHours);
-            
+            //var nextExecutionDate = currentExecutionDate.AddDays(config.OccursEvery);
+            //var nextExecutionTime = config.StartTime.AddHours(config.EveryHours);
+
             nextDate = config.StartDate > config.CurrentDate
                 ? config.StartDate
-                : nextExecutionDate.ToDateTime(nextExecutionTime);
+                : currentExecutionDate.AddDays(config.OccursEvery);
+            GuardHelper.ValidateMaxHoursEntered(config.EveryHours);
             GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:config.StartTime, endTime:config.EndTime);
             // var currentExecutionTime = config.StartTime;
             description = $"Schedule will be used starting on {config.StartDate}";

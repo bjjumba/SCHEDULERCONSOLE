@@ -24,6 +24,13 @@ public class GuardHelper
     public static void CheckIfStartTimeIsBeforeEndTime(TimeOnly startTime, TimeOnly endTime)
     {
         if (startTime > endTime)
-            throw new ArgumentException("StartTime is after EndTime");
+            throw new Exception("StartTime is after EndTime");
+    }
+    
+    /******Maximum EveryHours Guard******/
+    public static void ValidateMaxHoursEntered(int hours)
+    {
+        if (hours > 23)
+            throw new Exception("Hours entered are out of bound");
     }
 }
