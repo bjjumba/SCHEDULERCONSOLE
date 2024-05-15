@@ -41,4 +41,24 @@ public class RecurringTest
         //Assert
         Assert.Equal(expectedDate, result.Item1);
     }
+
+    [Fact]
+    public void Magic()
+    {
+        Dictionary<int, string> dict1 = new Dictionary<int, string>
+        {
+            { 1, "one" },
+            { 2, "two" },
+            { 3, "three" }
+        };
+
+        Dictionary<int, string> dict2 = new Dictionary<int, string>
+        {
+            { 1, "one" },
+            { 2, "two" },
+            { 3, "three" }
+        };
+        
+        Assert.Equal(dict1, dict2);
+    }
 }
