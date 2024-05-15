@@ -18,4 +18,8 @@ public class GuardHelper
         if (config.ConfDateTime < DateTime.Now)
             throw new Exception("Date and Time must be in the future");
     }
+    
+    /*Daily Ocurrence*/
+    
+
 }
