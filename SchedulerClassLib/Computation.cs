@@ -10,8 +10,11 @@ public static class Computation
         
         if (config.OccurenceType == Occurence.Recurring)
         {
+            var timeIntervals = new Dictionary<DateTime,TimeOnly>();
             GuardHelper.ValidateInput(config);
             nextDate = config.StartDate > config.CurrentDate ? config.StartDate : currentExecutionDate.AddDays(config.OccursEvery);
+            GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:config.StartTime, endTime:config.EndTime);
+            // var currentExecutionTime = config.StartTime;
             description = $"Schedule will be used starting on {config.StartDate}";
         }
         

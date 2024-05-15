@@ -20,6 +20,12 @@ public class GuardHelper
     }
     
     /*Daily Ocurrence*/
+
+    public static void CheckIfStartTimeIsBeforeEndTime(TimeOnly startTime, TimeOnly endTime)
+    {
+        if (startTime > endTime)
+            throw new ArgumentException("StartTime is After EndTime");
+    }
     
 
 }
