@@ -2,26 +2,33 @@ namespace SchedulerClassLib;
 
 public static class Computation
 {
-    public static Tuple<DateTime, string> ComputeNextDate(Config config)
+    public static Tuple<DateTime, string, Dictionary<DateTime,List<TimeOnly>>> ComputeNextDate(Config config)
     {
         DateTime currentExecutionDate = config.CurrentDate;
         DateTime nextDate = default;
+        var recurringTimeInterval = new Dictionary<DateTime, List<TimeOnly>>();
         var description = "";
         
         if (config.OccurenceType == Occurence.Recurring)
         {
             var timeIntervals = new Dictionary<DateTime,TimeOnly>();
             GuardHelper.ValidateInput(config);
-            
-            //var nextExecutionDate = currentExecutionDate.AddDays(config.OccursEvery);
-            //var nextExecutionTime = config.StartTime.AddHours(config.EveryHours);
-
+     
             nextDate = config.StartDate > config.CurrentDate
                 ? config.StartDate
                 : currentExecutionDate.AddDays(config.OccursEvery);
             GuardHelper.ValidateMaxHoursEntered(config.EveryHours);
             GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:config.StartTime, endTime:config.EndTime);
-            // var currentExecutionTime = config.StartTime;
+            
+            recurringTimeInterval.Add(nextDate,[config.StartTime]);
+            var startTime = config.StartTime;
+               
+            while ( startTime < config.EndTime)
+            {
+                startTime = startTime.AddHours(config.EveryHours);
+                recurringTimeInterval[nextDate].Add(startTime);
+            }
+         
             description = $"Schedule will be used starting on {config.StartDate}";
         }
         
@@ -33,7 +40,7 @@ public static class Computation
             nextDate = config.ConfDateTime;
             description = $"Schedule will be used on {date} at {time} starting on {config.StartDate}";
         }
-        return Tuple.Create(nextDate, description)!;
+        return Tuple.Create(nextDate, description, recurringTimeInterval)!;
     }
     
  
