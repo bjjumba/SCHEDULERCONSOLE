@@ -11,4 +11,8 @@ public class Config
     public DateTime EndDate { get; set; } //input required for both
     public TimeOnly StartTime { get; set; }
     public TimeOnly EndTime { get; set; }
+    
+    public Days[] SelectedWeekDays { get; set; }
+    
+    public int Weeks { get; set; }
 }

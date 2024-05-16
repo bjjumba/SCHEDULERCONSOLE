@@ -18,22 +18,30 @@ public static class Computation
             {
                 nextDate = config.StartDate > config.CurrentDate
                     ? config.StartDate
-                    : currentExecutionDate.AddDays(config.OccursDays);
+                    : currentExecutionDate;
                 
-                ///This has been put in function ComputeDailyFrequency
-                // GuardHelper.ValidateMaxHoursEntered(config.EveryHours);
-                // GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:config.StartTime, endTime:config.EndTime);
-                //
-                // recurringTimeInterval.Add(nextDate,[config.StartTime]);
-                // var startTime = config.StartTime;
-                //
-                // while ( startTime < config.EndTime)
-                // {
-                //     startTime = startTime.AddHours(config.EveryHours);
-                //     if (startTime > config.EndTime)
-                //         break;
-                //     recurringTimeInterval[nextDate].Add(startTime);
-                // }
+                GuardHelper.ValidateMaxHoursEntered(config.EveryHours);
+                GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:config.StartTime, endTime:config.EndTime);
+                
+                var myDates = new List<DateTime> ();
+                var addNWeeks = nextDate.AddDays(config.Weeks);
+                
+                for (var i = 0; i < 7; i++)
+                {
+                   myDates.Add(addNWeeks.AddDays(i));
+                }
+                
+                foreach (var day in myDates)
+                {
+                    foreach (var selectedDate in config.SelectedWeekDays)
+                    {
+                        if ((int)selectedDate == (int)day.DayOfWeek)
+                        {
+                            ComputeDailyFrequency(config.StartTime, config.EndTime, config.EveryHours, recurringTimeInterval, day);
+                        }
+                    }
+                }
+                
             }
             
             else if (config.Occurs == OccurenceFrequency.Daily)
@@ -41,7 +49,10 @@ public static class Computation
                 nextDate = config.StartDate > config.CurrentDate
                     ? config.StartDate
                     : currentExecutionDate.AddDays(config.OccursDays);
-
+                
+                GuardHelper.ValidateMaxHoursEntered(config.EveryHours);
+                GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:config.StartTime, endTime:config.EndTime);
+                
                 ComputeDailyFrequency(config.StartTime, config.EndTime, config.EveryHours, recurringTimeInterval, nextDate);
             }
          

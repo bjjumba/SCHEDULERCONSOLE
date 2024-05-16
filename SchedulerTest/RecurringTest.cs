@@ -145,6 +145,54 @@ public class RecurringTest
         //Assert
         
         Assert.Equal(expectedResult, result.Item3);
+    }
 
+    [Fact]
+    public void Recurring_With_Weekly_Ocurrence()
+    {
+        var expectedResult = new Dictionary<DateTime, List<TimeOnly>>
+        {
+            {
+                new DateTime(2024,6,17),
+                [
+                    new TimeOnly(4,0,0),
+                    new TimeOnly(6,0,0),
+                    new TimeOnly(8,0,0)
+                ]
+            },
+            {
+                new DateTime(2024,6,20),
+                [
+                    new TimeOnly(4,0,0),
+                    new TimeOnly(6,0,0),
+                    new TimeOnly(8,0,0)
+                ]
+            },
+            {
+                new DateTime(2024,6,21),
+                [
+                    new TimeOnly(4,0,0),
+                    new TimeOnly(6,0,0),
+                    new TimeOnly(8,0,0)
+                ]
+            }
+
+        };
+        var result = Computation.ComputeNextDate(new Config
+        {
+            CurrentDate = new DateTime(2024, 6, 3),
+            OccurenceType = Occurence.Recurring,
+            Occurs = OccurenceFrequency.Weekly,
+            OccursDays = 1,
+            StartDate = new DateTime(2024, 5, 14),
+            EndDate = new DateTime(2024, 8, 20),
+            StartTime = new TimeOnly(4, 0, 0),
+            EndTime = new TimeOnly(9, 0, 0),
+            EveryHours = 2,
+            SelectedWeekDays = new Days[] { Days.Monday, Days.Thursday, Days.Friday },
+            Weeks = (int)WeekOcurrence.Two
+        });
+        
+        Assert.Equal(expectedResult,result.Item3);
     }
 }
