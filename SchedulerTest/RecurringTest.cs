@@ -108,4 +108,38 @@ public class RecurringTest
         Assert.Equal(expectedResult, result.Item3);
 
     }
+    
+    [Fact]
+    public void Recurring_With_Hourly_Interval_And_Next_Execution_Time_Exceeds_EndTime()
+    {
+        var expectedResult = new Dictionary<DateTime, List<TimeOnly>>
+        {
+            {
+                new DateTime(2020,1,6),
+                [
+                    new TimeOnly(4,0,0),
+                    new TimeOnly(6,0,0),
+                    new TimeOnly(8,0,0)
+                ]
+            }
+        };
+
+        //Computation
+        var result = Computation.ComputeNextDate(new Config
+        {
+            CurrentDate = new DateTime(2020, 1, 5),
+            OccurenceType = Occurence.Recurring,
+            OccursEvery = 1,
+            StartDate = new DateTime(2020, 1, 1),
+            EndDate = new DateTime(2020, 1, 8),
+            StartTime = new TimeOnly(4, 0, 0),
+            EndTime = new TimeOnly(9, 0, 0),
+            EveryHours = 2
+        });
+        
+        //Assert
+        
+        Assert.Equal(expectedResult, result.Item3);
+
+    }
 }

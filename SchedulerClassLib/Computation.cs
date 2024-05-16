@@ -26,6 +26,8 @@ public static class Computation
             while ( startTime < config.EndTime)
             {
                 startTime = startTime.AddHours(config.EveryHours);
+                if (startTime > config.EndTime)
+                    break;
                 recurringTimeInterval[nextDate].Add(startTime);
             }
          
