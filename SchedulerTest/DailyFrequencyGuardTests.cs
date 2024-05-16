@@ -24,7 +24,7 @@ public class DailyFrequencyGuardTests
         {
             CurrentDate = new DateTime(2020, 1, 9),
             OccurenceType = Occurence.Recurring,
-            OccursEvery = 1,
+            OccursDays = 1,
             StartDate = new DateTime(2020, 1, 1),
             EndDate = new DateTime(2020, 1, 8),
             StartTime = new TimeOnly(4, 0, 0),

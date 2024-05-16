@@ -12,7 +12,7 @@ public class GuardTest
             ConfDateTime = new DateTime(2024, 5, 4, 3, 40, 5),
             CurrentDate = new DateTime(2020, 1, 9),
             OccurenceType = Occurence.Recurring,
-            OccursEvery = 1,
+            OccursDays = 1,
             StartDate = new DateTime(2020, 1, 1),
             EndDate = new DateTime(2020, 1, 8)
         }));

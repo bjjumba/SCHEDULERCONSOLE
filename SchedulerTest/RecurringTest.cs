@@ -14,7 +14,8 @@ public class RecurringTest
         {
             CurrentDate = new DateTime(2020, 1, 4),
             OccurenceType = Occurence.Recurring,
-            OccursEvery = 1,
+            Occurs = OccurenceFrequency.Daily,
+            OccursDays = 1,
             StartDate = new DateTime(2020, 1, 1),
             EndDate = new DateTime(2020, 1, 8),
         });
@@ -33,7 +34,8 @@ public class RecurringTest
         {
             CurrentDate = new DateTime(2020, 1, 1),
             OccurenceType = Occurence.Recurring,
-            OccursEvery = 1,
+            Occurs = OccurenceFrequency.Daily,
+            OccursDays = 1,
             StartDate = new DateTime(2020, 1, 4),
             EndDate = new DateTime(2020, 1, 8),
         });
@@ -62,7 +64,8 @@ public class RecurringTest
         {
             CurrentDate = new DateTime(2020, 1, 1),
             OccurenceType = Occurence.Recurring,
-            OccursEvery = 1,
+            Occurs = OccurenceFrequency.Daily,
+            OccursDays = 1,
             StartDate = new DateTime(2020, 1, 4),
             EndDate = new DateTime(2020, 1, 8),
             StartTime = new TimeOnly(4, 0, 0),
@@ -95,7 +98,8 @@ public class RecurringTest
         {
             CurrentDate = new DateTime(2020, 1, 5),
             OccurenceType = Occurence.Recurring,
-            OccursEvery = 1,
+            Occurs = OccurenceFrequency.Daily,
+            OccursDays = 1,
             StartDate = new DateTime(2020, 1, 1),
             EndDate = new DateTime(2020, 1, 8),
             StartTime = new TimeOnly(4, 0, 0),
@@ -129,7 +133,8 @@ public class RecurringTest
         {
             CurrentDate = new DateTime(2020, 1, 5),
             OccurenceType = Occurence.Recurring,
-            OccursEvery = 1,
+            Occurs = OccurenceFrequency.Daily,
+            OccursDays = 1,
             StartDate = new DateTime(2020, 1, 1),
             EndDate = new DateTime(2020, 1, 8),
             StartTime = new TimeOnly(4, 0, 0),

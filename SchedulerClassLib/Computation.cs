@@ -13,22 +13,36 @@ public static class Computation
         {
             var timeIntervals = new Dictionary<DateTime,TimeOnly>();
             GuardHelper.ValidateInput(config);
-     
-            nextDate = config.StartDate > config.CurrentDate
-                ? config.StartDate
-                : currentExecutionDate.AddDays(config.OccursEvery);
-            GuardHelper.ValidateMaxHoursEntered(config.EveryHours);
-            GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:config.StartTime, endTime:config.EndTime);
             
-            recurringTimeInterval.Add(nextDate,[config.StartTime]);
-            var startTime = config.StartTime;
-               
-            while ( startTime < config.EndTime)
+            if (config.Occurs == OccurenceFrequency.Weekly)
             {
-                startTime = startTime.AddHours(config.EveryHours);
-                if (startTime > config.EndTime)
-                    break;
-                recurringTimeInterval[nextDate].Add(startTime);
+                nextDate = config.StartDate > config.CurrentDate
+                    ? config.StartDate
+                    : currentExecutionDate.AddDays(config.OccursDays);
+                
+                ///This has been put in function ComputeDailyFrequency
+                // GuardHelper.ValidateMaxHoursEntered(config.EveryHours);
+                // GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:config.StartTime, endTime:config.EndTime);
+                //
+                // recurringTimeInterval.Add(nextDate,[config.StartTime]);
+                // var startTime = config.StartTime;
+                //
+                // while ( startTime < config.EndTime)
+                // {
+                //     startTime = startTime.AddHours(config.EveryHours);
+                //     if (startTime > config.EndTime)
+                //         break;
+                //     recurringTimeInterval[nextDate].Add(startTime);
+                // }
+            }
+            
+            else if (config.Occurs == OccurenceFrequency.Daily)
+            {
+                nextDate = config.StartDate > config.CurrentDate
+                    ? config.StartDate
+                    : currentExecutionDate.AddDays(config.OccursDays);
+
+                ComputeDailyFrequency(config.StartTime, config.EndTime, config.EveryHours, recurringTimeInterval, nextDate);
             }
          
             description = $"Schedule will be used starting on {config.StartDate}";
@@ -45,7 +59,30 @@ public static class Computation
         return Tuple.Create(nextDate, description, recurringTimeInterval)!;
     }
     
- 
+    //Function to calculate daily frequency for recurring
+    public static void ComputeDailyFrequency(TimeOnly startingTime, TimeOnly endingTime, int hours, Dictionary<DateTime, List<TimeOnly>> dictionary, DateTime date)
+    {
+        var recurringTimeInterval = dictionary;
+        var nextDate = date;
+        var startTime = startingTime;
+        var endTime = endingTime;
+        var everyHours = hours;
+        
+        GuardHelper.ValidateMaxHoursEntered(everyHours);
+        GuardHelper.CheckIfStartTimeIsBeforeEndTime(startTime:startTime, endTime:endTime);
+            
+        recurringTimeInterval.Add(nextDate,[startTime]);
+        var newTime = startTime;
+               
+        while ( newTime < endTime)
+        {
+            newTime = newTime.AddHours(everyHours);
+            if (newTime > endTime)
+                break;
+            recurringTimeInterval[nextDate].Add(newTime);
+        }
+    }
+    
 }
 
 
